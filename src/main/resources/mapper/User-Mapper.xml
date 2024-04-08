@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.secondhandMarkets.dao.UserDao">
+  
+  <insert id="insert" parameterType="UserVo">
+   <![CDATA[
+      insert into user_table 
+      	(sno, id, password1, password2, email) 
+      values(
+      	(select 
+      		COALESCE(max(cast(sno as integer)) + 1,'1') as sno
+      	   from user_table), 
+      	   #{id}, 
+      	   #{password1}, 
+      	   #{password2}, 
+      	   #{email}
+      )  
+   ]]>  
+  </insert>
+  
+  <select id="login" parameterType="String" resultType="UserVo">
+   <![CDATA[
+      select
+      	sno,
+        id,
+        password1,
+      	password2,
+      	email
+      from user_table
+      where id = #{id}
+   ]]>  
+  </select>
+</mapper>

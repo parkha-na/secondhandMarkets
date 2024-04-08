@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.secondhandMarkets.dao.BoardDao">
+  <select id="select" resultType="BoardVo">
+       select sno, sname, title, contents, modify_date from board_table 
+       where 1 = 1
+	  <if test="ch1=='sno'">
+		 <![CDATA[
+		 and sno like concat('%', #{ch2}, '%')
+		 ]]>
+	 </if>
+	 <if test="ch1=='sname'">
+		 <![CDATA[
+		 and sname like concat('%', #{ch2}, '%')
+		 ]]>
+	 </if>
+	 <if test="ch1=='title'">
+		 <![CDATA[
+		 and title like concat('%', #{ch2}, '%')
+		 ]]>
+	 </if>
+	 <if test="ch1=='contents'">
+		 <![CDATA[
+		 and contents like concat('%', #{ch2}, '%')
+		 ]]>
+	 </if>
+       order by sno desc
+  </select>
+  
+  <select id="content" parameterType="BoardVo" resultType="BoardVo">
+    <![CDATA[
+       select sno, sname, title, contents, modify_date from board_table where sno= #{sno}
+    ]]>  
+  </select>  
+  
+  <insert id="insert" parameterType="BoardVo">
+   <![CDATA[
+      insert into board_table (sno, sname, title, contents, modify_date) values(#{sno}, #{sname}, #{title}, #{contents}, now()::Date)  
+   ]]>  
+  </insert>
+  
+  <update id="update" parameterType="BoardVo">
+   <![CDATA[
+      update board_table set title=#{title}, contents=#{contents}, modify_date=now()::Date where sno= #{sno}
+   ]]>  
+  </update>  
+  
+  <select id="form" parameterType="BoardVo" resultType="BoardVo">
+  	<![CDATA[   	
+	 	select COALESCE(max(cast(sno as integer)) + 1,'1') as sno from board_table
+	 	]]> 	 
+  </select> 
+  
+  <delete id="delete" parameterType="BoardVo">
+   <![CDATA[
+      delete from board_table where sno= #{sno}
+   ]]>  
+  </delete>
+
+  <insert id="insertImage" parameterType="ImageVo">
+   <![CDATA[
+        insert into image_table (uuidFileName)
+        values( #{uuidFileName})
+        ]]>
+  </insert>
+
+    <select id="selectImage" resultType="ImageVo">
+    select * from image_table where uuidFileName in (#{uuidFileName})
+    </select>
+
+    <update id="updateImage" parameterType="ImageVo">
+   <![CDATA[
+        update image_table set uuidFileName=#{uuidFileName} where uuidFileName in (#{uuidFileName})
+        ]]>
+  </update>
+</mapper>

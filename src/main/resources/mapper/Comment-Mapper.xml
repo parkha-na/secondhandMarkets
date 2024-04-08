@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.secondhandMarkets.dao.CommentDao">
+  
+  <select id="commentList" resultType="CommentVo" parameterType="CommentVo">
+   <![CDATA[
+      select
+      	writer,
+        comments,
+        modify_date      	
+      from comment_table where sno = #{sno}
+   ]]>  
+  </select>
+  
+   <insert id="insertComments" parameterType="CommentVo">
+   <![CDATA[
+      insert into comment_table 
+      	(sno, comments, writer, delete_yn, create_date, modify_date) 
+      values(
+      	(select 
+      		COALESCE(max(cast(sno as integer)),'1') as sno
+      	   from board_table), 
+      	   #{comments}, 
+      	   #{writer}, 
+      	   'n',
+      	   now()::Date,
+      	   now()::Date
+      )  
+   ]]>  
+  </insert>
+  
+  <select id="commentCount" resultType="int">
+   <![CDATA[
+      select
+      	count(*)     	
+      from comment_table where sno = #{sno}
+   ]]>  
+  </select>
+   
+  <delete id="deleteComments" parameterType="CommentVo">
+   <![CDATA[
+      delete from comment_table
+      where sno = #{sno}
+   ]]>  
+  </delete>
+</mapper>

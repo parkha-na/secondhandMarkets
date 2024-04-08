@@ -1,0 +1,125 @@
+
+body {
+	text-align: center;
+}
+
+#sno {
+		background-color: #E2E2E2;
+	}
+	
+	.fm {
+		border: none;		
+	}
+	
+	table {
+  border-collapse: collapse;
+  width: 1000px;
+  margin: 1rem auto;
+  background-color: white;
+  border-right: none;
+  border-left: none;
+}
+
+thead{
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 테이블 행 */
+td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  border-right: none;
+  border-left: none;
+}
+
+#leftTitle {
+	text-align: left;
+}
+
+th {
+  padding: 8px;
+  text-align: center;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  color: #000;
+  border-right: none;
+  border-left: none;
+}
+
+/* 테이블 올렸을 때 */
+tbody tr:hover {
+  background-color: #FFFF00;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+/* 테이블 비율 */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 15%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 30%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 40%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 15%;
+}
+
+
+	.wrapper {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	}
+	
+	.main {
+		box-shadow: inset 0 0 20px #FFFF00;
+	  width: 850px;
+	  position: absolute;
+	  left: 50%;
+	  top: 50%;
+	  transform: translate(-50%, -50%);
+	  text-align: center;
+	  color: #ffffff;
+	}
+	
+	#indexBody {
+		background-color: #000000;
+	}
+	
+	#contents {
+	  width: 98%;
+	  height: 200px;
+	  
+	  padding: 4px 6px;
+	  border: 1px solid #999;
+	  border-radius: 4px;
+	  resize: none;
+	  font-size: 18px;
+	}
+
+#btnLogout {
+	visibility: hidden;
+}
+
+#posting {
+	visibility: hidden;
+}
+
+#commentDate {
+	text-align: right;
+}
+
+#btnEdit {
+	text-align: right;
+	padding-right: 24%;
+}
